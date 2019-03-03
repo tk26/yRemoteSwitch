@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>YT Remote Switch</title>
+    </head>
+    
+    <body>
+        <div id="root">
+            <a href="#" id="kill">Kill</a>
+
+            <a href="#" id="reset">Reset</a>
+        </div>
+    </body>
+    
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCVRIR38JYvE_lnoKbTO7Z9XsDr2RRFXQE",
+            authDomain: "yctrl-9fb18.firebaseapp.com",
+            databaseURL: "https://yctrl-9fb18.firebaseio.com",
+            projectId: "yctrl-9fb18",
+            storageBucket: "yctrl-9fb18.appspot.com",
+            messagingSenderId: "736023016017"
+        };
+        
+        const app = firebase.initializeApp(config);
+        const appDb = app.database().ref();
+
+        const killAllRef = appDb.child("killAll");
+
+        // handle kill button click
+        document.addEventListener("click", (e) => {
+            if (e.target.id === 'kill') {
+                killAllRef.set(true);
+            }
+
+            if (e.target.id === 'reset') {
+                killAllRef.set(false);
+            }
+
+            e.preventDefault();
+        });
+
+    </script>
